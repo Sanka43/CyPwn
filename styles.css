@@ -297,6 +297,36 @@ input, select, #clearBtn {
   overflow: auto;
 }
 
+.modal-shots {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin: 10px 0;
+}
+
+.modal-shots img {
+  height: 140px;
+  border-radius: 8px;
+  border: 1px solid #32496f;
+  object-fit: cover;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.modal-actions a {
+  color: #9fc7ff;
+  text-decoration: none;
+  border: 1px solid #4f78bc;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
 .modal-actions {
   display: flex;
   gap: 8px;

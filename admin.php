@@ -1,12 +1,11 @@
 <?php
-require_once __DIR__ . '/db.php';
+declare(strict_types=1);
 
-try {
-  $pdo = getDb();
-  $count = (int)$pdo->query('SELECT COUNT(*) FROM ipa')->fetchColumn();
-} catch (Throwable $e) {
-  $count = 0;
-}
+require_once __DIR__ . '/json_store.php';
+
+$counts = collectionCounts();
+$premiumCount = (int)($counts['premium'] ?? 0);
+$trollstoreCount = (int)($counts['trollstore'] ?? 0);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +58,7 @@ try {
     .meta { color: var(--muted); font-size: 13px; }
     .toolbar {
       display: grid;
-      grid-template-columns: 1fr 180px;
+      grid-template-columns: 1fr 160px 120px;
       gap: 8px;
       margin: 10px 0 12px;
     }
@@ -137,6 +136,7 @@ try {
 
     @media (max-width: 960px) {
       .container { grid-template-columns: 1fr; }
+      .toolbar { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -146,14 +146,18 @@ try {
       <div class="top">
         <div>
           <h1>CyPwn Tools Admin</h1>
-          <p class="meta">Now running on MySQL database (<code>ipa</code> table)</p>
+          <p class="meta">JSON: premium <?= $premiumCount ?> · trollstore <?= $trollstoreCount ?></p>
         </div>
-        <a href="index.php">Back to Library</a>
+        <a href="index.html">Back to Library</a>
       </div>
 
       <div class="toolbar">
         <input id="searchInput" type="search" placeholder="Search by name, developer, category...">
-        <button id="reloadBtn" type="button">Reload List</button>
+        <select id="collectionSelect">
+          <option value="premium">Premium IPAs</option>
+          <option value="trollstore">TrollStore</option>
+        </select>
+        <button id="reloadBtn" type="button">Reload</button>
       </div>
 
       <div class="table-wrap">
@@ -171,17 +175,17 @@ try {
         </table>
       </div>
       <p class="small" id="listMeta">Loading...</p>
-      <?php if ($count === 0): ?>
+      <?php if ($premiumCount === 0 && $trollstoreCount === 0): ?>
       <div class="steps">
-        Database is empty. Run once: <code>php migrate_json_to_ipa.php</code><br>
-        Then click <b>Reload List</b>.
+        No data found. Add entries via this panel or place JSON files at
+        <code>deta/premium_ipas.json</code> and <code>deta/trollstore_ipas.json</code>.
       </div>
       <?php endif; ?>
     </section>
 
     <section class="panel">
       <h2 id="formTitle">Create New Tool</h2>
-      <p class="small">Select row ???? click ???? edit/delete ?????, ??????? new tool create ?????.</p>
+      <p class="small">Select a row to edit or delete, or fill the form to create a new tool in the active collection.</p>
 
       <form id="toolForm">
         <input type="hidden" id="toolId">
@@ -202,7 +206,8 @@ try {
           <input id="iconURL" placeholder="iconURL (e.g. assets/icons/x.png)">
           <input id="icon_asset" placeholder="icon_asset (absolute path optional)">
         </div>
-        <div>
+        <div class="two-col">
+          <input id="detailURL" placeholder="detailURL (optional)">
           <input id="downloadURL" placeholder="downloadURL">
         </div>
         <div class="two-col">

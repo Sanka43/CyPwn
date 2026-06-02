@@ -1,6 +1,7 @@
 const apiUrl = "admin_api.php";
 
 const searchInput = document.getElementById("searchInput");
+const collectionSelect = document.getElementById("collectionSelect");
 const reloadBtn = document.getElementById("reloadBtn");
 const toolRows = document.getElementById("toolRows");
 const listMeta = document.getElementById("listMeta");
@@ -22,6 +23,7 @@ const fields = [
   "description",
   "iconURL",
   "icon_asset",
+  "detailURL",
   "downloadURL",
   "price",
   "tool_type",
@@ -30,6 +32,7 @@ const fields = [
 ];
 
 const state = {
+  collection: "premium",
   tools: [],
   selectedId: null,
 };
@@ -71,6 +74,7 @@ function readFormTool() {
     description: document.getElementById("description").value.trim(),
     iconURL: document.getElementById("iconURL").value.trim(),
     icon_asset: document.getElementById("icon_asset").value.trim(),
+    detailURL: document.getElementById("detailURL").value.trim(),
     downloadURL: document.getElementById("downloadURL").value.trim(),
     price: Number(document.getElementById("price").value || 0),
     tool_type: document.getElementById("tool_type").value,
@@ -107,29 +111,28 @@ function fillForm(tool) {
   document.getElementById("description").value = tool.description || "";
   document.getElementById("iconURL").value = tool.iconURL || "";
   document.getElementById("icon_asset").value = tool.icon_asset || "";
+  document.getElementById("detailURL").value = tool.detailURL || "";
   document.getElementById("downloadURL").value = tool.downloadURL || "";
   document.getElementById("price").value = String(tool.price ?? 0);
   document.getElementById("tool_type").value = tool.tool_type === "paid" ? "paid" : "free";
   document.getElementById("screenshots").value = Array.isArray(tool.screenshots) ? tool.screenshots.join(", ") : "";
-  document.getElementById("screenshot_assets").value = Array.isArray(tool.screenshot_assets) ? tool.screenshot_assets.join(", ") : "";
+  document.getElementById("screenshot_assets").value = Array.isArray(tool.screenshot_assets)
+    ? tool.screenshot_assets.join(", ")
+    : "";
 }
 
 function renderRows() {
   const q = searchInput.value.trim().toLowerCase();
   const filtered = state.tools.filter((tool) => {
     if (!q) return true;
-    return [
-      tool.name,
-      tool.developer_name,
-      tool.category,
-      tool.subtitle,
-      tool.version,
-    ]
+    return [tool.name, tool.developer_name, tool.category, tool.subtitle, tool.version]
       .map((v) => String(v || "").toLowerCase())
       .some((v) => v.includes(q));
   });
 
-  listMeta.textContent = `${filtered.length} / ${state.tools.length} tools`;
+  const label = state.collection === "trollstore" ? "TrollStore" : "Premium IPAs";
+  listMeta.textContent = `${filtered.length} / ${state.tools.length} tools (${label})`;
+
   if (!filtered.length) {
     toolRows.innerHTML = `<tr><td colspan="5">No tools found.</td></tr>`;
     return;
@@ -153,12 +156,16 @@ function renderRows() {
 
 async function fetchTools() {
   clearStatus();
+  state.collection = collectionSelect.value;
   try {
-    const res = await fetch(apiUrl, { cache: "no-store" });
+    const res = await fetch(`${apiUrl}?collection=${encodeURIComponent(state.collection)}`, {
+      cache: "no-store",
+    });
     const data = await res.json();
     if (!res.ok || !data.ok) {
       throw new Error(data.message || "Failed to load tools");
     }
+
     state.tools = Array.isArray(data.tools) ? data.tools : [];
     if (state.selectedId !== null) {
       const existing = state.tools.find((t) => Number(t._id) === Number(state.selectedId));
@@ -185,8 +192,8 @@ async function saveTool(event) {
   }
 
   const payload = selectedId
-    ? { action: "update", id: Number(selectedId), tool }
-    : { action: "create", tool };
+    ? { action: "update", id: Number(selectedId), collection: state.collection, tool }
+    : { action: "create", collection: state.collection, tool };
 
   try {
     const res = await fetch(apiUrl, {
@@ -223,7 +230,11 @@ async function deleteTool() {
     const res = await fetch(apiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "delete", id: Number(selectedId) }),
+      body: JSON.stringify({
+        action: "delete",
+        id: Number(selectedId),
+        collection: state.collection,
+      }),
     });
     const data = await res.json();
     if (!res.ok || !data.ok) {
@@ -252,6 +263,10 @@ toolRows.addEventListener("click", (event) => {
 });
 
 searchInput.addEventListener("input", renderRows);
+collectionSelect.addEventListener("change", () => {
+  resetForm();
+  fetchTools();
+});
 reloadBtn.addEventListener("click", fetchTools);
 newBtn.addEventListener("click", resetForm);
 deleteBtn.addEventListener("click", deleteTool);
