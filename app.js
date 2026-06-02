@@ -20,6 +20,7 @@ function esc(value) {
 }
 
 function buildCategories() {
+  categoryFilter.innerHTML = '<option value="all">All Categories</option>';
   const categories = [...new Set(tools.map((t) => (t.category || "Other").trim()))].filter(Boolean).sort();
   for (const c of categories) {
     const option = document.createElement("option");
@@ -115,7 +116,6 @@ function showModal(tool) {
     <p class="modal-desc">${esc(tool.description || "No description available")}</p>
     <div class="modal-actions">
       <a href="${esc(tool.downloadURL || "#")}" target="_blank" rel="noopener">Download</a>
-      <a href="${esc(tool.detailURL || "#")}" target="_blank" rel="noopener">Details</a>
     </div>
   `;
 
@@ -153,21 +153,19 @@ modal.addEventListener("click", (event) => {
 
 async function init() {
   try {
-    const response = await fetch("deta/premium_ipas.json", { cache: "no-store" });
-    if (!response.ok) {
-      throw new Error("Unable to load JSON");
+    const response = await fetch("admin_api.php", { cache: "no-store" });
+    const payload = await response.json();
+
+    if (!response.ok || !payload.ok) {
+      throw new Error(payload.message || "Unable to load tools from database");
     }
 
-    tools = await response.json();
-    if (!Array.isArray(tools)) {
-      tools = [];
-    }
-
+    tools = Array.isArray(payload.tools) ? payload.tools : [];
     buildCategories();
     render();
   } catch (error) {
     resultText.textContent = "Failed to load data";
-    cards.innerHTML = '<article class="card"><p class="meta">JSON load failed. Check file path.</p></article>';
+    cards.innerHTML = `<article class="card"><p class="meta">${esc(error.message || "DB load failed")}</p></article>`;
   }
 }
 

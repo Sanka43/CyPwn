@@ -340,7 +340,7 @@ input, select, #clearBtn {
   }
 
   .brand {
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .nav-links {
@@ -349,7 +349,7 @@ input, select, #clearBtn {
   }
 
   .nav-links a {
-    font-size: 11px;
+    font-size: 12.5px;
   }
 
   .notice {
@@ -358,22 +358,27 @@ input, select, #clearBtn {
   }
 
   .logo-section {
-    padding: 18px 0 12px;
+    padding: 20px 0 14px;
   }
 
   .hero-logo {
-    width: 96px;
-    height: 96px;
+    width: 112px;
+    height: 112px;
   }
 
   .tab {
-    padding: 9px 6px;
-    font-size: 11px;
+    padding: 11px 8px;
+    font-size: 12.5px;
   }
 
   .repo-btn {
-    font-size: 11px;
-    padding: 8px 6px;
+    font-size: 12.5px;
+    padding: 11px 8px;
+  }
+
+  input, select, #clearBtn {
+    font-size: 14px;
+    min-height: 44px;
   }
 
   .search-wrap {
@@ -390,15 +395,20 @@ input, select, #clearBtn {
   }
 
   .card {
-    padding: 10px;
+    padding: 13px;
   }
 
   .name {
-    font-size: 15px;
+    font-size: 17px;
   }
 
   .meta {
-    font-size: 10.5px;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .category-label {
+    font-size: 14px;
   }
 
   .modal {
@@ -409,6 +419,11 @@ input, select, #clearBtn {
   .modal-actions {
     flex-direction: column;
   }
+
+  .modal-actions a {
+    font-size: 14px;
+    padding: 11px;
+  }
 }
 
 @media (max-width: 420px) {
@@ -418,12 +433,12 @@ input, select, #clearBtn {
 
   .brand {
     gap: 8px;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .brand-logo {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
   }
 
   .nav-links {
@@ -439,27 +454,31 @@ input, select, #clearBtn {
   }
 
   .category-label {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .card-head {
-    grid-template-columns: 44px 1fr auto;
+    grid-template-columns: 48px 1fr auto;
     gap: 7px;
   }
 
   .icon {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
   }
 
   .name {
-    font-size: 14px;
+    font-size: 16px;
+  }
+
+  .meta {
+    font-size: 11.5px;
   }
 
   .eye-btn {
-    min-width: 34px;
-    height: 24px;
-    padding: 0 8px;
-    font-size: 9px;
+    min-width: 40px;
+    height: 28px;
+    padding: 0 10px;
+    font-size: 10.5px;
   }
 }

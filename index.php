@@ -34,7 +34,7 @@ $categoryCount = count($categories);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CyPwn Tools Library</title>
+  <title>CyPwn</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -42,11 +42,14 @@ $categoryCount = count($categories);
     <div class="brand-wrap">
       <div class="logo">CP</div>
       <div>
-        <h1>CyPwn Tools Library</h1>
+        <h1>CyPwn</h1>
         <p>Premium IPA collection, clean home UI</p>
       </div>
     </div>
-    <a class="cta" href="#toolsSection">Browse Tools</a>
+    <div style="display:flex; gap: 10px;">
+      <a class="cta" href="#toolsSection">Browse Tools</a>
+      <a class="cta" href="admin.php" style="background:#1d3256; border-color:#325284;">Admin Panel</a>
+    </div>
   </header>
 
   <main>
