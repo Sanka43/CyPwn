@@ -9,9 +9,19 @@ const closeModal = document.getElementById("closeModal");
 const tabButtons = document.querySelectorAll(".tabs .tab");
 
 const COLLECTIONS = {
-  premium: { label: "Premium IPAs", param: "premium" },
-  trollstore: { label: "TrollStore", param: "trollstore" },
+  premium: { label: "Premium IPAs", dataFile: "deta/premium_ipas.json" },
+  trollstore: { label: "TrollStore", dataFile: "deta/trollstore_ipas.json" },
 };
+
+function parseToolsPayload(data) {
+  if (Array.isArray(data)) {
+    return data;
+  }
+  if (data && Array.isArray(data.tools)) {
+    return data.tools;
+  }
+  return [];
+}
 
 let activeCollection = "premium";
 let tools = [];
@@ -187,17 +197,19 @@ async function loadCollection(collection) {
   cards.innerHTML = "";
 
   try {
-    const response = await fetch(
-      `admin_api.php?collection=${encodeURIComponent(COLLECTIONS[collection].param)}`,
-      { cache: "no-store" }
-    );
-    const payload = await response.json();
-
-    if (!response.ok || !payload.ok) {
-      throw new Error(payload.message || "Unable to load tools");
+    const source = COLLECTIONS[collection];
+    if (!source?.dataFile) {
+      throw new Error("Unknown collection");
     }
 
-    tools = Array.isArray(payload.tools) ? payload.tools : [];
+    const response = await fetch(source.dataFile, { cache: "no-store" });
+    const payload = await response.json();
+
+    if (!response.ok) {
+      throw new Error("Unable to load tools");
+    }
+
+    tools = parseToolsPayload(payload);
     buildCategories();
     render();
   } catch (error) {
