@@ -1,0 +1,8 @@
+# Allow public repo data and icons; block script execution
+<FilesMatch "\.(json|png|jpg|jpeg|webp|gif)$">
+    Require all granted
+</FilesMatch>
+
+<FilesMatch "\.(php|phtml|php3|php4|php5|phps|cgi|pl|asp|aspx|jsp)$">
+    Require all denied
+</FilesMatch>

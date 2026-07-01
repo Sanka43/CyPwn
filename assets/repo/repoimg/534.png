@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <link href="https://twickd.com/css/app.css"
+          rel="stylesheet">
+    <title>Feature unavailable</title>
+</head>
+
+<body>
+    <div id="app"
+         class="errors overflow-hidden h-screen flex items-center relative">
+        <div class="absolute top-0 left-0 h-full w-full flex z-10">
+            <div class="svg w-5/6 md:w-1/2 -top-32 md:top-0 right-0 top">
+                <svg width="845"
+                     height="845"
+                     viewBox="0 0 845 845"
+                     fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M121.278 17.5124C144.628 -5.83744 182.485 -5.83746 205.835 17.5123L827.488 639.165C850.838 662.515 850.837 700.372 827.488 723.722L723.722 827.488C700.372 850.837 662.515 850.837 639.165 827.488L17.5123 205.835C-5.83746 182.485 -5.83744 144.628 17.5124 121.278L121.278 17.5124Z"
+                          fill="url(#paint0_linear)" />
+                    <path d="M530.88 417.886C554.229 441.236 554.229 479.093 530.88 502.443L205.835 827.488C182.485 850.837 144.628 850.837 121.278 827.488L17.5124 723.722C-5.83742 700.372 -5.83744 662.515 17.5124 639.165L342.557 314.12C365.907 290.771 403.764 290.771 427.114 314.12L530.88 417.886Z"
+                          fill="url(#paint1_linear)" />
+                    <path d="M775.605 257.718C723.601 309.722 639.286 309.722 587.282 257.718C535.278 205.714 535.278 121.399 587.282 69.3951C639.286 17.3912 723.601 17.3912 775.605 69.3951C827.609 121.399 827.609 205.714 775.605 257.718Z"
+                          fill="url(#paint2_linear)" />
+                    <defs>
+                        <linearGradient id="paint0_linear"
+                                        x1="-1.25915e-05"
+                                        y1="845"
+                                        x2="940.571"
+                                        y2="720.182"
+                                        gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#8F1440" />
+                            <stop offset="0.505208"
+                                  stop-color="#EB1741" />
+                            <stop offset="1"
+                                  stop-color="#FD4C34" />
+                        </linearGradient>
+                        <linearGradient id="paint1_linear"
+                                        x1="-1.25915e-05"
+                                        y1="845"
+                                        x2="940.571"
+                                        y2="720.182"
+                                        gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#8F1440" />
+                            <stop offset="0.505208"
+                                  stop-color="#EB1741" />
+                            <stop offset="1"
+                                  stop-color="#FD4C34" />
+                        </linearGradient>
+                        <linearGradient id="paint2_linear"
+                                        x1="-1.25915e-05"
+                                        y1="845"
+                                        x2="940.571"
+                                        y2="720.182"
+                                        gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#8F1440" />
+                            <stop offset="0.505208"
+                                  stop-color="#EB1741" />
+                            <stop offset="1"
+                                  stop-color="#FD4C34" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 max-w-xl text-center md:text-left relative">
+            <p class="hidden md:inline-flex pointer-events-none select-none code font-inter leading-none font-black text-white dark:text-gray-900 opacity-75 dark:opacity-50 absolute -top-32 z-0">
+                520            </p>
+            <div class="space-y-6 mb-12 relative z-20">
+                  <p class="text-twickd-500 text-xl">Something happenned</p>
+                  <h1 class="font-bold text-5xl">Feature unavailable</h1>
+                  <p>This feature is currently unavailable, but will soon be!</p>
+                  <p class="text-red-400 text-sm font-semibold">ERROR CODE 520</p>
+            </div>
+            <div class="flex relative z-20">
+                  <div class="grid grid-cols-2 gap-4 items-center mx-auto md:mx-0">
+                      <a href="https://twickd.com"
+                         class="button bg-twickd-500 hover:bg-twickd-700 text-white">
+                          Go home
+                      </a>
+                      <a href="https://twickd.com"
+                         class="button bg-twickd-500 bg-opacity-15 hover:bg-opacity-100 text-twickd-500 hover:text-white">
+                          Back
+                      </a>
+                  </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+
+</html>

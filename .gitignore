@@ -1,0 +1,16 @@
+# Local credentials (create from database.example.php on each machine)
+config/database.local.php
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+
+# Cursor / temp assets (not part of the app)
+assets/c__*
+
+# Large archives / local transfer bundles
+*.zip
+.remote-check/

@@ -1,0 +1,491 @@
+/* CyPwn Repo — Packages page (extends style.css) */
+
+.repo-page .repo-main {
+    padding-bottom: 5.5rem;
+}
+
+.repo-page .hero {
+    padding-top: 0.5rem;
+}
+
+/* ── Add Repo panel ── */
+.repo-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.repo-add-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1rem;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.repo-add-toggle:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.repo-add-toggle[aria-expanded="true"] .toggle-arrow {
+    transform: rotate(180deg);
+}
+
+.toggle-arrow {
+    transition: transform 0.2s;
+    color: var(--text-muted);
+}
+
+.repo-add-body {
+    display: none;
+    padding: 0 0.75rem 0.75rem;
+}
+
+.repo-add-body.open {
+    display: block;
+}
+
+.repo-add-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-bottom: 0.65rem;
+}
+
+/* Gradient border buttons */
+.repo-add-wrap {
+    display: block;
+    padding: 2px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: padding 0.25s ease;
+}
+
+.repo-add-wrap:hover {
+    padding: 0;
+    text-decoration: none;
+}
+
+.btn-cydia.repo-add-wrap {
+    background: linear-gradient(90deg, #f97316, #facc15);
+}
+
+.btn-installer.repo-add-wrap {
+    background: linear-gradient(90deg, #2563eb, #38bdf8);
+}
+
+.btn-sileo.repo-add-wrap {
+    background: linear-gradient(90deg, #e11d48, #fb923c);
+}
+
+.btn-zebra.repo-add-wrap {
+    background: linear-gradient(90deg, #6b7280, #d1d5db);
+}
+
+.repo-add-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.6rem 1rem;
+    background: var(--bg);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.25s ease, border-radius 0.25s ease, color 0.25s ease;
+}
+
+.repo-add-wrap:hover .repo-add-btn {
+    border-radius: 10px;
+    color: #fff;
+}
+
+.btn-cydia.repo-add-wrap:hover .repo-add-btn {
+    background: linear-gradient(90deg, #f97316, #facc15);
+}
+
+.btn-installer.repo-add-wrap:hover .repo-add-btn {
+    background: linear-gradient(90deg, #2563eb, #38bdf8);
+}
+
+.btn-sileo.repo-add-wrap:hover .repo-add-btn {
+    background: linear-gradient(90deg, #e11d48, #fb923c);
+}
+
+.btn-zebra.repo-add-wrap:hover .repo-add-btn {
+    background: linear-gradient(90deg, #6b7280, #d1d5db);
+    color: #111;
+}
+
+.btn-zebra.repo-add-wrap:hover .repo-add-btn svg {
+    color: #111;
+}
+
+.repo-add-btn svg {
+    opacity: 0.9;
+    flex-shrink: 0;
+    transition: color 0.25s ease;
+}
+
+.show-sections-btn {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    background: var(--accent-blue);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+.show-sections-btn:hover {
+    filter: brightness(1.1);
+}
+
+/* ── Search ── */
+.repo-search {
+    margin-bottom: 1.5rem;
+}
+
+.repo-search-wrap {
+    background: var(--surface);
+    border-color: #30363d;
+    border-radius: 10px;
+}
+
+.search-results-label {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.repo-loading {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-muted);
+}
+
+/* ── Sections ── */
+.pkg-section {
+    margin-bottom: 2.25rem;
+    scroll-margin-top: 4.5rem;
+}
+
+.section-heading {
+    margin: 0 0 0.75rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+/* ── Carousel ── */
+.pkg-carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.pkg-track {
+    display: flex;
+    gap: 0.75rem;
+    transition: transform 0.55s ease-in-out;
+    will-change: transform;
+}
+
+.pkg-carousel .pkg-card {
+    flex: 0 0 calc((100% - 1.5rem) / 3);
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 992px) {
+    .pkg-carousel .pkg-card {
+        flex: 0 0 calc((100% - 0.75rem) / 2);
+    }
+}
+
+@media (max-width: 576px) {
+    .pkg-carousel .pkg-card {
+        flex: 0 0 100%;
+    }
+}
+
+/* ── Package card (match IPA Library app-card sizes) ── */
+.pkg-card {
+    --card-icon-size: 62px;
+    --card-gap: 0.65rem;
+    --card-pad-y: 0.7rem;
+    --card-pad-x: 0.75rem;
+    --card-title-size: 0.8125rem;
+    --card-meta-size: 0.6875rem;
+    --card-view-size: 34px;
+    --card-dot-size: 6px;
+
+    display: flex;
+    align-items: center;
+    gap: var(--card-gap);
+    padding: var(--card-pad-y) var(--card-pad-x);
+    padding-left: calc(var(--card-pad-x) - 2px);
+    min-height: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-left: 3px solid var(--card-accent);
+    border-radius: 8px;
+    box-shadow: inset 0 1px 0 rgba(59, 130, 246, 0.06);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+@media (min-width: 577px) and (max-width: 992px) {
+    .pkg-card {
+        --card-icon-size: 58px;
+        --card-title-size: 0.84rem;
+        --card-meta-size: 0.72rem;
+        --card-view-size: 38px;
+    }
+}
+
+@media (min-width: 993px) {
+    .pkg-card {
+        --card-icon-size: 54px;
+        --card-gap: 0.55rem;
+        --card-pad-y: 0.65rem;
+        --card-pad-x: 0.7rem;
+        --card-title-size: 0.78rem;
+        --card-meta-size: 0.66rem;
+        --card-view-size: 34px;
+        --card-dot-size: 5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .pkg-card {
+        --card-icon-size: 60px;
+        --card-gap: 0.75rem;
+        --card-pad-y: 0.8rem;
+        --card-pad-x: 0.9rem;
+        --card-title-size: 0.9rem;
+        --card-meta-size: 0.75rem;
+        --card-view-size: 40px;
+        --card-dot-size: 6px;
+    }
+}
+
+.pkg-card:hover,
+.pkg-card:focus-visible {
+    background: #243447;
+    border-color: rgba(59, 130, 246, 0.28);
+    box-shadow: inset 0 1px 0 rgba(59, 130, 246, 0.1), 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.pkg-card.hidden {
+    display: none !important;
+}
+
+.pkg-icon-wrap {
+    flex-shrink: 0;
+    width: var(--card-icon-size, 54px);
+    height: var(--card-icon-size, 54px);
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.pkg-icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #e8eaed;
+}
+
+.pkg-icon-placeholder {
+    flex-shrink: 0;
+    width: var(--card-icon-size, 54px);
+    height: var(--card-icon-size, 54px);
+    border-radius: 50%;
+    background: #e8eaed;
+    border: 2px solid rgba(59, 130, 246, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+}
+
+.pkg-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.pkg-name {
+    font-size: var(--card-title-size, 0.78rem);
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.28rem;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pkg-meta-line {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: var(--card-meta-size, 0.66rem);
+    line-height: 1.35;
+    margin: 0 0 0.1rem;
+    min-width: 0;
+}
+
+.pkg-meta-line .meta-dot {
+    width: var(--card-dot-size, 5px);
+    height: var(--card-dot-size, 5px);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.meta-dot--author  { background: var(--dot-version); }
+.meta-dot--version { background: var(--dot-size); }
+
+.pkg-author,
+.pkg-version {
+    color: var(--meta-value);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pkg-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+    margin-top: 0.28rem;
+}
+
+.pkg-tag {
+    font-size: 0.5625rem;
+    font-weight: 600;
+    padding: 0.1rem 0.35rem;
+    border-radius: 20px;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.tag-tweaks   { background: #8957e5; }
+.tag-themes   { background: #0969da; }
+.tag-other    { background: #484f58; }
+.tag-rootless { background: #fb8500; color: #111; }
+.tag-xina     { background: #da3633; }
+.tag-ios13    { background: #238636; }
+.tag-ios14    { background: #1f6feb; }
+.tag-ios15    { background: #0550ae; }
+.tag-ios16    { background: #8957e5; }
+.tag-default  { background: #484f58; }
+
+/* ── Go to Section bottom bar ── */
+.goto-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    background: rgba(22, 27, 34, 0.95);
+    border-top: 1px solid #30363d;
+    backdrop-filter: blur(8px);
+    padding: 0.5rem 1rem;
+}
+
+.goto-bar-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.goto-bar-toggle:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.goto-bar-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    padding: 0.5rem 0 0.25rem;
+    border-top: 1px solid #30363d;
+    margin-top: 0.35rem;
+}
+
+.goto-bar-menu.hidden {
+    display: none;
+}
+
+.goto-link {
+    display: inline-block;
+    padding: 0.35rem 0.65rem;
+    font-size: 0.78rem;
+    color: #58a6ff;
+    text-decoration: none;
+    background: rgba(31, 111, 235, 0.1);
+    border-radius: 6px;
+    transition: background 0.15s;
+}
+
+.goto-link:hover {
+    background: rgba(31, 111, 235, 0.2);
+    text-decoration: none;
+}
+
+/* ── Modal ── */
+.pkg-modal-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 18px;
+    object-fit: cover;
+    background: #21262d;
+}
+
+.modal-version-line {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+}
+
+.pkg-modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+}
+
+.modal-actions {
+    margin-top: 1.25rem;
+}

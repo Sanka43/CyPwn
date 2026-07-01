@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script type="text/javascript" src="https://web-static.archive.org/_static/js/bundle-playback.js?v=2N_sDSC0" charset="utf-8"></script>
+<script type="text/javascript" src="https://web-static.archive.org/_static/js/wombat.js?v=o9P2E1FK" charset="utf-8"></script>
+<script>window.RufflePlayer=window.RufflePlayer||{};window.RufflePlayer.config={"autoplay":"on","unmuteOverlay":"hidden","showSwfDownload":true};</script>
+<script type="text/javascript" src="https://web-static.archive.org/_static/js/ruffle/ruffle.js"></script>
+<script type="text/javascript">
+    __wm.init("https://web.archive.org/web");
+  __wm.wombat("https://repo.cypwn.xyz/error","20240219085213","https://web.archive.org/","web","https://web-static.archive.org/_static/",
+	      "1708332733");
+</script>
+<link rel="stylesheet" type="text/css" href="https://web-static.archive.org/_static/css/banner-styles.css?v=1utQkbB3" />
+<link rel="stylesheet" type="text/css" href="https://web-static.archive.org/_static/css/iconochive.css?v=3PDvdIFv" />
+<!-- End Wayback Rewrite JS Include -->
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="language" content="English">
+<meta name="description" content="CyPwn Repo | 2023 | Unfiltered Jailbreak Community">
+<meta name="keywords" content="CyPwn, Jailbreak, IOS, Cydia, Zebra, Sileo, Installer, Unc0ver, free">
+<meta name="author" content="CyPwn Repo">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://web.archive.org/web/20240219085213/https://repo.cypwn.xyz/">
+<meta property="og:title" content="CyPwn Repo">
+<meta property="og:description" content="CyPwn Repo | 2023 | Unfiltered Jailbreak Community">
+<meta property="og:image" content="https://web.archive.org/web/20240219085213im_/https://i.imgur.com/CMonecu.png">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://repo.cypwn.xyz/">
+<meta property="twitter:title" content="CyPwn Repo">
+<meta property="twitter:description" content="CyPwn Repo | 2023 | Unfiltered Jailbreak Community">
+<meta property="twitter:image" content="https://i.imgur.com/CMonecu.png">
+<title>Error!</title>
+<link rel="shortcut icon" type="image/ico" href="/web/20240219085213im_/https://repo.cypwn.xyz/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="/web/20240219085213cs_/https://repo.cypwn.xyz/assets/css/main.css"/>
+</head>
+<body class="px-2 bg-white dark:bg-gray-900 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-inherit scroll-smooth">
+<section class="flex h-screen bg-white dark:bg-gray-900">
+<div class="flex items-center max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6">
+<div class="max-w-screen-sm mx-auto text-center">
+<script data-pagespeed-no-defer>//<![CDATA[
+(function(){for(var g="function"==typeof Object.defineProperties?Object.defineProperty:function(b,c,a){if(a.get||a.set)throw new TypeError("ES3 does not support getters and setters.");b!=Array.prototype&&b!=Object.prototype&&(b[c]=a.value)},h="undefined"!=typeof window&&window===this?this:"undefined"!=typeof global&&null!=global?global:this,k=["String","prototype","repeat"],l=0;l<k.length-1;l++){var m=k[l];m in h||(h[m]={});h=h[m]}var n=k[k.length-1],p=h[n],q=p?p:function(b){var c;if(null==this)throw new TypeError("The 'this' value for String.prototype.repeat must not be null or undefined");c=this+"";if(0>b||1342177279<b)throw new RangeError("Invalid count value");b|=0;for(var a="";b;)if(b&1&&(a+=c),b>>>=1)c+=c;return a};q!=p&&null!=q&&g(h,n,{configurable:!0,writable:!0,value:q});var t=this;function u(b,c){var a=b.split("."),d=t;a[0]in d||!d.execScript||d.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===c?d[e]?d=d[e]:d=d[e]={}:d[e]=c};function v(b){var c=b.length;if(0<c){for(var a=Array(c),d=0;d<c;d++)a[d]=b[d];return a}return[]};function w(b){var c=window;if(c.addEventListener)c.addEventListener("load",b,!1);else if(c.attachEvent)c.attachEvent("onload",b);else{var a=c.onload;c.onload=function(){b.call(this);a&&a.call(this)}}};var x;function y(b,c,a,d,e){this.h=b;this.j=c;this.l=a;this.f=e;this.g={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.i=d;this.b={};this.a=[];this.c={}}function z(b,c){var a,d,e=c.getAttribute("data-pagespeed-url-hash");if(a=e&&!(e in b.c))if(0>=c.offsetWidth&&0>=c.offsetHeight)a=!1;else{d=c.getBoundingClientRect();var f=document.body;a=d.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);d=d.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+d;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.g.height&&d<=b.g.width)}a&&(b.a.push(e),b.c[e]=!0)}y.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&z(this,b)};u("pagespeed.CriticalImages.checkImageForCriticality",function(b){x.checkImageForCriticality(b)});u("pagespeed.CriticalImages.checkCriticalImages",function(){A(x)});function A(b){b.b={};for(var c=["IMG","INPUT"],a=[],d=0;d<c.length;++d)a=a.concat(v(document.getElementsByTagName(c[d])));if(a.length&&a[0].getBoundingClientRect){for(d=0;c=a[d];++d)z(b,c);a="oh="+b.l;b.f&&(a+="&n="+b.f);if(c=!!b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),d=1;d<b.a.length;++d){var e=","+encodeURIComponent(b.a[d]);131072>=a.length+e.length&&(a+=e)}b.i&&(e="&rd="+encodeURIComponent(JSON.stringify(B())),131072>=a.length+e.length&&(a+=e),c=!0);C=a;if(c){d=b.h;b=b.j;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(r){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(D){}}f&&(f.open("POST",d+(-1==d.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}}function B(){var b={},c;c=document.getElementsByTagName("IMG");if(!c.length)return{};var a=c[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var d=0;a=c[d];++d){var e=a.getAttribute("data-pagespeed-url-hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].o&&a.height>=b[e].m)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b}var C="";u("pagespeed.CriticalImages.getBeaconData",function(){return C});u("pagespeed.CriticalImages.Run",function(b,c,a,d,e,f){var r=new y(b,c,a,e,f);x=r;d&&w(function(){window.setTimeout(function(){A(r)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','https://web.archive.org/web/20240219085213/https://repo.cypwn.xyz/error','PjGRSJgbbN',true,false,'tUE74VqusZw');
+//]]></script><img src="/web/20240219085213im_/https://repo.cypwn.xyz/assets/images/safemode.jpg" class="justify-center mx-auto mb-4" data-pagespeed-url-hash="1920669406" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"/>
+<p class="mb-4 text-3xl font-bold tracking-tight text-gray-900 md:text-4xl dark:text-white">
+Safe Mode (404)
+</p>
+<p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
+We apologize for the inconvenience, but the Page doesn't exist.
+</p>
+<p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
+You /did/ cause this problem.
+</p>
+<a href="/web/20240219085213/https://repo.cypwn.xyz/" class="button relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+<span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+Restart
+</span>
+</a>
+</div>
+</div>
+</section>
+<script src="/web/20240219085213js_/https://repo.cypwn.xyz/assets/js/main.b4e6f2e71f3386bf5184.bundle.js"></script>
+<script defer src="https://web.archive.org/web/20240219085213js_/https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317" integrity="" data-cf-beacon="{&quot;rayId&quot;:&quot;857d45bfd9cb67e9&quot;,&quot;version&quot;:&quot;2024.2.0&quot;,&quot;r&quot;:1,&quot;token&quot;:&quot;3a7c977c5c734dab9b8de386f093635d&quot;,&quot;b&quot;:1}" crossorigin="anonymous"></script>
+</body>
+</html><!--
+     FILE ARCHIVED ON 08:52:13 Feb 19, 2024 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 04:49:02 Jun 08, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 0.407
+  exclusion.robots: 0.036
+  exclusion.robots.policy: 0.026
+  esindex: 0.007
+  cdx.remote: 9.3
+  LoadShardBlock: 75.486 (3)
+  PetaboxLoader3.datanode: 73.403 (4)
+  PetaboxLoader3.resolve: 45.434 (2)
+  load_resource: 71.84
+-->
