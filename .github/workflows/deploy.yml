@@ -15,7 +15,7 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v4
 
-      - name: Deploy live site to cPanel public_html
+      - name: Deploy live site to cPanel
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -24,7 +24,7 @@ jobs:
           protocol: ftp
           port: 21
           local-dir: ./
-          server-dir: /public_html/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
           timeout: 120000
           log-level: standard
           exclude: |
