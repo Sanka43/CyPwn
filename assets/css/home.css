@@ -71,6 +71,22 @@
     border-color: rgba(148, 163, 184, 0.3);
 }
 
+.home-pill-active {
+    background: var(--surface-hover);
+    color: var(--text);
+    border-color: rgba(148, 163, 184, 0.35);
+}
+
+.home-page .page-body {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1rem 4rem;
+}
+
+.home-page .page-body .hero {
+    padding-top: 0;
+}
+
 .home-get-btn {
     flex-shrink: 0;
     display: inline-flex;

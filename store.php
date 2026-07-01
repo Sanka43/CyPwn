@@ -51,11 +51,18 @@ foreach ($apps as $app) {
     <?= analytics_tags() ?>
     <?= favicon_tags() ?>
     <link rel="stylesheet" href="<?= e(asset_url('assets/css/style.css')) ?>">
+    <link rel="stylesheet" href="<?= e(asset_url('assets/css/home.css')) ?>">
 </head>
-<body>
-    <?php require __DIR__ . '/partials/site_header.php'; ?>
-
+<body class="home-page">
     <main class="main-content">
+        <?php
+        $activeNav = 'store';
+        $pageHeading = 'Store';
+        $pageTagline = 'Browse IPAs and TrollStore apps.';
+        require __DIR__ . '/partials/home_header.php';
+        ?>
+
+        <div class="page-body">
         <?php require __DIR__ . '/partials/hero_tabs.php'; ?>
 
         <section class="search-section">
@@ -108,6 +115,7 @@ foreach ($apps as $app) {
             <?php endif; ?>
             <p class="no-results hidden" id="no-results">No apps match your search.</p>
         </section>
+        </div>
     </main>
 
     <?php require __DIR__ . '/partials/site_footer.php'; ?>

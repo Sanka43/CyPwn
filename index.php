@@ -43,7 +43,7 @@ $featureCards = [
     [
         'title' => 'CyPwn Repo',
         'desc' => 'Tweaks, themes, and jailbreak packages from our official repository.',
-        'url' => url('Packages.php'),
+        'url' => url('repo.php'),
         'btn' => 'light',
         'theme' => 'pink',
         'icon' => '<svg class="home-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>',

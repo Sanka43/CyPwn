@@ -13,10 +13,16 @@ $app = get_app_by_id($pdo, $id);
 if (!$app) {
     http_response_code(404);
     $pageTitle = 'App not found — ' . page_title();
+    $activeNav = 'store';
+    $pageHeading = 'App not found';
+    $pageTagline = 'This app could not be found.';
 } else {
     $tab = ($app['store_type'] ?? 'ipa') === 'trollstore' ? 'trollstore' : 'ipa';
     $screenshots = decode_screenshots($app['screenshots'] ?? null);
     $pageTitle = $app['name'] . ' — ' . page_title();
+    $activeNav = 'store';
+    $pageHeading = $app['name'];
+    $pageTagline = !empty($app['subtitle']) ? (string) $app['subtitle'] : 'App details';
 }
 ?>
 <!DOCTYPE html>
@@ -29,26 +35,13 @@ if (!$app) {
     <?= analytics_tags() ?>
     <?= favicon_tags() ?>
     <link rel="stylesheet" href="<?= e(asset_url('assets/css/style.css')) ?>">
+    <link rel="stylesheet" href="<?= e(asset_url('assets/css/home.css')) ?>">
 </head>
-<body>
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="<?= e(url('index.php')) ?>" class="brand">
-                <img src="<?= e(asset_url($config['logo'] ?? 'assets/img/logo.svg')) ?>" alt="<?= e($config['brand_short'] ?? $config['site_name']) ?>" class="brand-logo-sm" width="28" height="28">
-                <span><?= e($config['brand_short'] ?? $config['site_name']) ?></span>
-            </a>
-            <div class="header-actions">
-                <nav class="header-nav" id="header-nav">
-                    <?php foreach ($config['nav_links'] as $link): ?>
-                        <?php $openNewTab = !empty($link['new_tab']); ?>
-                        <a href="<?= e($link['url']) ?>" class="nav-link"<?= $openNewTab ? ' target="_blank" rel="noopener noreferrer"' : '' ?>><?= e($link['label']) ?></a>
-                    <?php endforeach; ?>
-                </nav>
-            </div>
-        </div>
-    </header>
-
+<body class="home-page">
     <main class="main-content">
+        <?php require __DIR__ . '/partials/home_header.php'; ?>
+
+        <div class="page-body">
         <?php if (!$app): ?>
             <section class="app-detail-section">
                 <p class="empty-state">This app could not be found.</p>
@@ -65,7 +58,6 @@ if (!$app) {
                             <img src="<?= e($app['icon']) ?>" alt="<?= e($app['name']) ?>" class="modal-icon" width="80" height="80">
                         <?php endif; ?>
                         <div class="modal-header-text">
-                            <h1 id="app-title"><?= e($app['name']) ?></h1>
                             <?php if (!empty($app['subtitle'])): ?>
                                 <p class="modal-subtitle"><?= e($app['subtitle']) ?></p>
                             <?php endif; ?>
@@ -103,10 +95,9 @@ if (!$app) {
                 </article>
             </section>
         <?php endif; ?>
+        </div>
     </main>
 
-    <footer class="site-footer">
-        <p><?= e($config['copyright'] ?? '© 2026 CyPwn') ?></p>
-    </footer>
+    <?php require __DIR__ . '/partials/site_footer.php'; ?>
 </body>
 </html>

@@ -4,8 +4,8 @@
     padding-bottom: 5.5rem;
 }
 
-.repo-page .hero {
-    padding-top: 0.5rem;
+.repo-page .page-body .hero {
+    padding-top: 0;
 }
 
 /* ── Add Repo panel ── */

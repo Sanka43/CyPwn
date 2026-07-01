@@ -226,13 +226,7 @@ a:hover {
 /* Hero */
 .hero {
     text-align: center;
-    padding: 1.5rem 0 0.5rem;
-}
-
-.hero-logo {
-    margin-bottom: 1.25rem;
-    object-fit: contain;
-    border-radius: 50%;
+    padding: 0 0 0.5rem;
 }
 
 .hero-title {
