@@ -34,4 +34,7 @@ jobs:
             config/database.local.php
             database/seed_admin.php
             database/schema.sql
+            assets/repo/repoimg/**
+            assets/trollstore/icons/**
+            assets/trollstore/screenshots/**
             *.zip

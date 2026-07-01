@@ -11,6 +11,14 @@ Thumbs.db
 # Cursor / temp assets (not part of the app)
 assets/c__*
 
+# Uploaded media (managed from the admin panel on each host)
+assets/repo/repoimg/*
+assets/trollstore/icons/*
+assets/trollstore/screenshots/*
+!assets/repo/repoimg/.gitkeep
+!assets/trollstore/icons/.gitkeep
+!assets/trollstore/screenshots/.gitkeep
+
 # Large archives / local transfer bundles
 *.zip
 .remote-check/
