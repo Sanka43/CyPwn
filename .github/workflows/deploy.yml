@@ -1,4 +1,4 @@
-name: Deploy dev to cPanel
+name: Deploy dev to cPanel public_html
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v4
 
-      - name: Deploy to cPanel dev folder
+      - name: Deploy to cPanel public_html
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -23,7 +23,7 @@ jobs:
           protocol: ftp
           port: 21
           local-dir: ./
-          server-dir: /
+          server-dir: /public_html/
           timeout: 120000
           log-level: standard
           exclude: |
@@ -31,4 +31,6 @@ jobs:
             **/.git*/**
             **/.github/**
             config/database.local.php
+            database/seed_admin.php
+            database/schema.sql
             *.zip
