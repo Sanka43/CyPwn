@@ -1,12 +1,13 @@
-name: Deploy dev to cPanel public_html
+name: Deploy live to cPanel
 
 on:
   push:
     branches:
-      - dev
+      - main
+  workflow_dispatch:
 
 jobs:
-  deploy-dev:
+  deploy-live:
     runs-on: ubuntu-latest
     timeout-minutes: 90
 
@@ -14,7 +15,7 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v4
 
-      - name: Deploy to cPanel public_html
+      - name: Deploy live site to cPanel public_html
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
