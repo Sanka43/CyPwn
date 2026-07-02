@@ -12,6 +12,7 @@
     const filterPanel = document.getElementById('filter-panel');
     const appsCatalog = document.getElementById('apps-catalog');
     const noResults = document.getElementById('no-results');
+    const filterOptions = document.querySelectorAll('.filter-option');
     let activeCategory = 'all';
     const overlay = document.getElementById('modal-overlay');
     const modal = document.getElementById('modal');
@@ -99,14 +100,12 @@
         }
     }
 
-    function setActiveCategory(category) {
+    function setActiveCategory(category, selectedOption) {
         activeCategory = category || 'all';
-        if (filterPanel) {
-            filterPanel.querySelectorAll('.filter-option').forEach(function (btn) {
-                const isActive = (btn.dataset.category || 'all') === activeCategory;
-                btn.classList.toggle('filter-option-active', isActive);
-            });
-        }
+        filterOptions.forEach(function (btn) {
+            const isActive = selectedOption ? btn === selectedOption : btn.dataset.category === activeCategory;
+            btn.classList.toggle('filter-option-active', isActive);
+        });
         applyFilters();
     }
 
@@ -137,7 +136,7 @@
         filterPanel.addEventListener('click', function (e) {
             const option = e.target.closest('.filter-option');
             if (!option) return;
-            setActiveCategory(option.dataset.category || 'all');
+            setActiveCategory(option.dataset.category || 'all', option);
             setFilterPanelOpen(false);
         });
 
@@ -153,6 +152,12 @@
             }
         });
     }
+
+    filterOptions.forEach(function (option) {
+        option.addEventListener('click', function () {
+            setActiveCategory(option.dataset.category || 'all', option);
+        });
+    });
 
     /* Modal */
     function openModal(app) {

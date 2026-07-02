@@ -6,6 +6,7 @@ declare(strict_types=1);
 /** @var array<int, array<string, string>>|null $navLinks */
 $navLinks = $navLinks ?? $config['nav_links'];
 $brandLabel = $config['brand_short'] ?? $config['site_name'] ?? '';
+$activeNav = $activeNav ?? '';
 ?>
 <header class="site-header">
     <div class="header-inner">
@@ -31,9 +32,11 @@ $brandLabel = $config['brand_short'] ?? $config['site_name'] ?? '';
                     $navHref = (str_starts_with($navUrl, 'http') || str_starts_with($navUrl, '#'))
                         ? $navUrl
                         : url($navUrl);
+                    $navKey = strtolower((string) ($link['icon'] ?? $link['label'] ?? ''));
+                    $navClass = 'nav-link' . ($activeNav === $navKey ? ' nav-link-active' : '');
                     ?>
                     <?php $openNewTab = !empty($link['new_tab']); ?>
-                    <a href="<?= e($navHref) ?>" class="nav-link"<?= $openNewTab ? ' target="_blank" rel="noopener noreferrer"' : '' ?>><?= e($link['label']) ?></a>
+                    <a href="<?= e($navHref) ?>" class="<?= e($navClass) ?>"<?= $openNewTab ? ' target="_blank" rel="noopener noreferrer"' : '' ?>><?= e($link['label']) ?></a>
                 <?php endforeach; ?>
             </nav>
         </div>

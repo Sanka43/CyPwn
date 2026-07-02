@@ -10,7 +10,7 @@ return [
     'logo' => 'assets/img/logo.png',
     'favicon' => 'assets/img/logo.png',
     'nav_links' => [
-        ['label' => 'Store', 'url' => 'store.php', 'icon' => 'store'],
+        ['label' => 'Apps', 'url' => 'apps.php', 'icon' => 'apps'],
         ['label' => 'CyPwn Repo', 'url' => 'repo.php', 'icon' => 'repo'],
         ['label' => 'Discord', 'url' => 'https://discord.com/invite/UvHZz3HfN9', 'icon' => 'discord', 'new_tab' => true],
         ['label' => 'Donate', 'url' => '#', 'icon' => 'donate'],

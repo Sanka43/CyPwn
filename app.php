@@ -58,6 +58,7 @@ if (!$app) {
                             <img src="<?= e($app['icon']) ?>" alt="<?= e($app['name']) ?>" class="modal-icon" width="80" height="80">
                         <?php endif; ?>
                         <div class="modal-header-text">
+                            <h1><?= e($app['name']) ?></h1>
                             <?php if (!empty($app['subtitle'])): ?>
                                 <p class="modal-subtitle"><?= e($app['subtitle']) ?></p>
                             <?php endif; ?>

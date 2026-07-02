@@ -365,6 +365,22 @@ function get_apps_by_store(PDO $pdo, string $storeType): array
     return $stmt->fetchAll();
 }
 
+function get_public_apps(PDO $pdo, int $limit = 0): array
+{
+    $orderBy = apps_public_order_sql($pdo);
+    $sql = "SELECT * FROM apps ORDER BY store_type ASC, {$orderBy}";
+    if ($limit > 0) {
+        $sql .= ' LIMIT ?';
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(1, $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    $stmt = $pdo->query($sql);
+    return $stmt->fetchAll();
+}
+
 function get_featured_apps(PDO $pdo, int $limit = 56): array
 {
     $limit = max(1, min($limit, 100));
@@ -544,4 +560,217 @@ function group_apps_by_category(array $apps): array
     }
 
     return $grouped;
+}
+
+function sources_table_exists(PDO $pdo): bool
+{
+    try {
+        $stmt = $pdo->query("SHOW TABLES LIKE 'sources'");
+        return $stmt->fetch() !== false;
+    } catch (PDOException) {
+        return false;
+    }
+}
+
+function ensure_sources_table(PDO $pdo): void
+{
+    $pdo->exec(
+        "CREATE TABLE IF NOT EXISTS sources (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            repository VARCHAR(255) NOT NULL,
+            source_url VARCHAR(1024) NOT NULL,
+            notes VARCHAR(255) NOT NULL DEFAULT '',
+            sort_order INT UNSIGNED NOT NULL DEFAULT 0,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            INDEX idx_sort_order (sort_order)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+    );
+}
+
+function get_sources(PDO $pdo): array
+{
+    ensure_sources_table($pdo);
+    $stmt = $pdo->query('SELECT * FROM sources ORDER BY sort_order ASC, repository ASC');
+    return $stmt->fetchAll();
+}
+
+function get_source_by_id(PDO $pdo, int $id): ?array
+{
+    ensure_sources_table($pdo);
+    $stmt = $pdo->prepare('SELECT * FROM sources WHERE id = ? LIMIT 1');
+    $stmt->execute([$id]);
+    $row = $stmt->fetch();
+    return $row ?: null;
+}
+
+function delete_source(PDO $pdo, int $id): bool
+{
+    ensure_sources_table($pdo);
+    $stmt = $pdo->prepare('DELETE FROM sources WHERE id = ?');
+    $stmt->execute([$id]);
+    normalize_source_sort_order($pdo);
+    return $stmt->rowCount() > 0;
+}
+
+function move_source(PDO $pdo, int $id, string $direction): bool
+{
+    ensure_sources_table($pdo);
+    $sources = get_sources($pdo);
+    $ids = array_map(static fn (array $source): int => (int) $source['id'], $sources);
+    $index = array_search($id, $ids, true);
+    if ($index === false) {
+        return false;
+    }
+
+    $targetIndex = $direction === 'up' ? $index - 1 : $index + 1;
+    if (!isset($ids[$targetIndex])) {
+        normalize_source_sort_order($pdo);
+        return false;
+    }
+
+    [$ids[$index], $ids[$targetIndex]] = [$ids[$targetIndex], $ids[$index]];
+    update_source_sort_order($pdo, $ids);
+    return true;
+}
+
+function reorder_sources(PDO $pdo, array $ids): bool
+{
+    ensure_sources_table($pdo);
+    $cleanIds = [];
+    foreach ($ids as $id) {
+        $id = (int) $id;
+        if ($id > 0 && !in_array($id, $cleanIds, true)) {
+            $cleanIds[] = $id;
+        }
+    }
+    if ($cleanIds === []) {
+        return false;
+    }
+
+    $existingIds = array_map(static fn (array $source): int => (int) $source['id'], get_sources($pdo));
+    $knownIds = array_values(array_intersect($cleanIds, $existingIds));
+    foreach ($existingIds as $id) {
+        if (!in_array($id, $knownIds, true)) {
+            $knownIds[] = $id;
+        }
+    }
+
+    update_source_sort_order($pdo, $knownIds);
+    return true;
+}
+
+function normalize_source_sort_order(PDO $pdo): void
+{
+    $sources = get_sources($pdo);
+    $ids = array_map(static fn (array $source): int => (int) $source['id'], $sources);
+    update_source_sort_order($pdo, $ids);
+}
+
+function update_source_sort_order(PDO $pdo, array $ids): void
+{
+    $stmt = $pdo->prepare('UPDATE sources SET sort_order = ? WHERE id = ?');
+    foreach (array_values($ids) as $index => $id) {
+        $stmt->execute([($index + 1) * 10, (int) $id]);
+    }
+}
+
+function validate_source_post(array $post): array
+{
+    $errors = [];
+    $sourceUrl = trim((string) ($post['source_url'] ?? ''));
+
+    if ($sourceUrl === '' || !filter_var($sourceUrl, FILTER_VALIDATE_URL)) {
+        $errors['source_url'] = 'Valid source URL is required.';
+    }
+
+    return $errors;
+}
+
+function infer_source_repository_name(string $sourceUrl): string
+{
+    $name = infer_source_repository_name_from_json($sourceUrl);
+    if ($name !== '') {
+        return $name;
+    }
+
+    $host = parse_url($sourceUrl, PHP_URL_HOST);
+    $path = trim((string) parse_url($sourceUrl, PHP_URL_PATH), '/');
+    $candidate = is_string($host) ? preg_replace('/^www\./i', '', $host) : '';
+
+    if (is_string($candidate) && preg_match('/(?:githubusercontent|github|gitlab|bitbucket)\./i', $candidate) === 1 && $path !== '') {
+        $parts = array_values(array_filter(explode('/', $path)));
+        $candidate = $parts[1] ?? $parts[0] ?? $candidate;
+    } elseif (is_string($candidate) && preg_match('/^(raw|cdn|api|files?)\./i', $candidate) === 1 && $path !== '') {
+        $parts = array_values(array_filter(explode('/', $path)));
+        $candidate = $parts[0] ?? $candidate;
+    }
+
+    $candidate = is_string($candidate) ? preg_replace('/\.(json|plist|txt)$/i', '', $candidate) : '';
+    $candidate = is_string($candidate) ? preg_replace('/\.[a-z]{2,}$/i', '', $candidate) : '';
+    $candidate = is_string($candidate) ? preg_replace('/[^a-z0-9]+/i', ' ', $candidate) : '';
+    $candidate = trim((string) $candidate);
+
+    return $candidate !== '' ? ucwords(strtolower($candidate)) : 'Source';
+}
+
+function infer_source_repository_name_from_json(string $sourceUrl): string
+{
+    $scheme = parse_url($sourceUrl, PHP_URL_SCHEME);
+    if (!is_string($scheme) || !in_array(strtolower($scheme), ['http', 'https'], true)) {
+        return '';
+    }
+
+    $context = stream_context_create([
+        'http' => [
+            'timeout' => 2,
+            'ignore_errors' => true,
+            'header' => "User-Agent: CyPwnSourceManager/1.0\r\nAccept: application/json,text/plain,*/*\r\n",
+        ],
+    ]);
+    $body = @file_get_contents($sourceUrl, false, $context, 0, 524288);
+    if (!is_string($body) || trim($body) === '') {
+        return '';
+    }
+
+    $data = json_decode($body, true);
+    if (!is_array($data)) {
+        return '';
+    }
+
+    foreach (['name', 'title', 'repository', 'repo_name', 'source_name'] as $key) {
+        $value = trim((string) ($data[$key] ?? ''));
+        if ($value !== '') {
+            return substr($value, 0, 255);
+        }
+    }
+
+    return '';
+}
+
+function save_source_from_post(PDO $pdo, array $post): array
+{
+    ensure_sources_table($pdo);
+    $errors = validate_source_post($post);
+    if ($errors !== []) {
+        return ['ok' => false, 'errors' => $errors];
+    }
+
+    $id = (int) ($post['source_id'] ?? 0);
+    $sourceUrl = trim((string) ($post['source_url'] ?? ''));
+    $repository = infer_source_repository_name($sourceUrl);
+    $notes = '';
+
+    if ($id > 0 && get_source_by_id($pdo, $id) !== null) {
+        $stmt = $pdo->prepare('UPDATE sources SET repository = ?, source_url = ?, notes = ? WHERE id = ?');
+        $stmt->execute([$repository, $sourceUrl, $notes, $id]);
+        return ['ok' => true, 'id' => $id, 'mode' => 'updated'];
+    }
+
+    $stmt = $pdo->query('SELECT COALESCE(MAX(sort_order), 0) + 10 FROM sources');
+    $sortOrder = (int) $stmt->fetchColumn();
+    $insert = $pdo->prepare('INSERT INTO sources (repository, source_url, notes, sort_order) VALUES (?, ?, ?, ?)');
+    $insert->execute([$repository, $sourceUrl, $notes, $sortOrder]);
+
+    return ['ok' => true, 'id' => (int) $pdo->lastInsertId(), 'mode' => 'created'];
 }

@@ -6,8 +6,7 @@ declare(strict_types=1);
 ?>
 <section class="home-apps-section" id="apps" aria-labelledby="home-apps-heading">
     <h2 class="home-apps-heading" id="home-apps-heading">
-        <span class="home-apps-heading-bold">Apps.</span>
-        <span class="home-apps-heading-muted">Community top.</span>
+        <span class="home-apps-heading-bold">Trending Apps</span>
     </h2>
 
     <?php if ($featuredApps === []): ?>
@@ -29,7 +28,7 @@ declare(strict_types=1);
         </div>
 
         <div class="home-apps-footer">
-            <a href="<?= e(url('store.php')) ?>" class="home-see-all-btn">See all</a>
+            <a href="<?= e(url('apps.php')) ?>" class="home-see-all-btn">See all</a>
         </div>
     <?php endif; ?>
 </section>
